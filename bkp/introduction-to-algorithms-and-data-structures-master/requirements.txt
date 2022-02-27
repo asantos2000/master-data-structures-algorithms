@@ -1,0 +1,4 @@
+## Please list additional packages with version numbers
+pyskiplist==1.*
+matplotlib==2.2.3
+networkx==2.3
