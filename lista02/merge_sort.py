@@ -26,7 +26,7 @@ def intercala(B,C):
 
 def merge_sort(A):
     tamanho = len(A)
-    meio = len(A) // 2
+    meio = tamanho // 2
     if tamanho <= 1:
         return A
     B = merge_sort(A[:meio])
@@ -35,6 +35,7 @@ def merge_sort(A):
 
 if __name__ == "__main__":
     print(merge_sort([4,3,7,2,1]))
+    print(merge_sort([6, 7, 8, 3, 4, 5, 1, 2, 3]))
     print(intercala([3,4],[1,2,7]))
     print(intercala([3,4,5],[1,2]))
     print(intercala([3],[1,2]))

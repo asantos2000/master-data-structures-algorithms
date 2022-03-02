@@ -1,5 +1,7 @@
 # EP01
 
+Anderson Santos / 40999
+
 ## Bibiliotecas
 
 ```bash
@@ -25,8 +27,8 @@ python -m pytest -s --hypothesis-show-statistics
 ### Contagem número execuções
 
 ```bash
-# Descomentar linha 27 k_esimo_menor.py (print)
 # Comentar linhas 29 e 55 test_k_esimo_menor.py (print)
+# Descomentar linha 27 k_esimo_menor.py (print)
 python -m pytest -s > result_count.txt
 ```
 
