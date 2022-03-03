@@ -4,6 +4,9 @@ Operações em lista ligada simples
 '''
 
 
+from http.client import NOT_MODIFIED
+
+
 class No:
     def __init__(self, dado=None):
         self.dado = dado
@@ -67,6 +70,16 @@ class ListaLigadaSimples:
             no = no.proximo
             return self.buscar_pos(k - 1, no)
 
+    def no_meio(self):
+        lento = self.primeiro_no
+        rapido = self.primeiro_no
+
+        while rapido and rapido.proximo:
+            lento = lento.proximo
+            rapido = rapido.proximo.proximo
+
+        return lento.dado
+
 
 if __name__ == "__main__":
     e1 = No("A")
@@ -95,3 +108,5 @@ if __name__ == "__main__":
     lista.imprimir()
 
     # lista.imprimir(e4)
+
+    print(f'No no meio: {lista.no_meio()}')
