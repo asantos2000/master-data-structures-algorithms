@@ -1,38 +1,31 @@
-def busca_ternaria(lista, elemento):
-    """
-    Função que busca um elemento em uma lista e retorna o índice
-    :param lista: Lista que será buscado o elemento
-    :param elemento: Elemento que será buscado
-    :return: Índice do elemento
-    """
-    inicio = 0
-    fim = len(lista) - 1
-    meio = (inicio + fim) // 2
-    while inicio <= fim:
-        if lista[meio] == elemento:
-            return meio
-        elif lista[meio] < elemento:
-            inicio = meio + 1
+def busca(inicio, fim, elemento, A):
+
+    if (fim >= inicio):
+        terco1 = inicio + (fim - inicio) // 3
+        terco2 = fim - (fim - inicio) // 3
+
+        if (A[terco1] == elemento):
+            return terco1
+
+        if (A[terco2] == elemento):
+            return terco2
+
+        if (elemento < A[terco1]):
+            return busca(inicio, terco1 - 1, elemento, A)
+        elif (elemento > A[terco2]):
+            return busca(terco2 + 1, fim, elemento, A)
         else:
-            fim = meio - 1
-        meio = (inicio + fim) // 2
+            return busca(terco1 + 1, terco2 - 1, elemento, A)
+
     return -1
 
-def busca_ternaria_recursiva(lista, elemento, inicio, fim):
-    """
-    Função que busca um elemento em uma lista e retorna o índice
-    :param lista: Lista que será buscado o elemento
-    :param elemento: Elemento que será buscado
-    :param inicio: Índice inicial da busca
-    :param fim: Índice final da busca
-    :return: Índice do elemento
-    """
-    if inicio > fim:
-        return -1
-    meio = (inicio + fim) // 2
-    if lista[meio] == elemento:
-        return meio
-    elif lista[meio] < elemento:
-        return busca_ternaria_recursiva(lista, elemento, meio + 1, fim)
-    else:
-        return busca_ternaria_recursiva(lista, elemento, inicio, meio - 1)
+if __name__ == "__main__":
+    # Driver code
+    A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    n = len(A)
+    elemento = 5
+    print(busca(0, n - 1, elemento, A)) # 4
+    elemento = 1
+    print(busca(0, n - 1, elemento, A)) # 0
+    elemento = 10
+    print(busca(0, n - 1, elemento, A)) # 9
