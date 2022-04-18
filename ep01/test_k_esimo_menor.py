@@ -35,7 +35,7 @@ def test_k_esimo_menor(X, Y):
 
 
 def test_double_k_esimo_menor():
-    for j in range(1, 10):
+    for _ in range(1, 10):
         i = 8
         while i <= 8192:
             X = random.sample(range(0, 10000), i)

@@ -5,7 +5,7 @@ def find_small(V, k):
     # sorting the list
     V.sort()
 
-    # printing the first element
+    # printing the k lowest element
     return V[k-1]
 
 if __name__ == "__main__":
