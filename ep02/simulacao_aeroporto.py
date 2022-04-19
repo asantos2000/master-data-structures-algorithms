@@ -111,13 +111,12 @@ class SimulacaoAeroporto:
         Simula o tráfego aéreo
         '''
         # Criação dos aviões
-        aviao = Aviao(
+        return Aviao(
             min_combustivel_aviao=self.min_combustivel_aviao,
             max_combustivel_aviao=self.max_combustivel_aviao,
             min_duracao_voo=self.min_duracao_voo,
             max_duracao_voo=self.max_duracao_voo
         )
-        return aviao
 
     def comunica_torre(self):
         '''
@@ -180,34 +179,35 @@ class SimulacaoAeroporto:
                 # Dado de comunicação
                 logger_com.info(f't: {self.tempo_simulacao}: Torre - aeronave {aviao.id}, situação {aviao.situacao} autorizando uso da pista de decolagem para pouso')
 
-    def desvia_aviao_outro_aeroporto(self):
+    def desvia_aviao_outro_aeroporto(self):  # sourcery skip: last-if-guard
         '''
         Desvia avião para outro aeroporto
         Se próxima iteração avião em risco de crash,
         desvia para outro aeroporto
         '''
         if len(self.fila_pouso) > 0:
-            _, _, _, aviao = self.fila_pouso[0]
-            # Quantidade de avioes na fila de pouso dividido pela qde de pistas mais um ciclo
-            tempo_estimado_para_pouso = (len(self.fila_pouso) // len(self.pistas_pouso)) + 1
-            # Assume uma unidade de combustivel para uma unidade de tempo
-            if aviao.combustivel < tempo_estimado_para_pouso:
-                # Primeiro sempre o aeroporto corrente
-                # Busca o próximo aeroporto
-                aeroporto_para_pouso = next(iter(aviao.aeroportos_chegada[1:]))
-                distancia_proximo_aeroporto = aeroportos[aeroporto_para_pouso]
-                if distancia_proximo_aeroporto <= aviao.combustivel:
-                    # Tira o avião da fila de pouso
-                    chave, _, _, aviao = hq.heappop(self.fila_pouso)
-                    self.total_combustivel_avioes_esperam_pouso -= aviao.combustivel
-                    # Dado de simulação
-                    logger_data.info(f';pop_desvia;{self.tempo_simulacao};{self.tempo_simulacao};{chave};{aviao.id};{aviao.combustivel};{aviao.situacao};{aviao.duracao_voo}')
-                    # Dado de comunicação
-                    logger_com.info(f't: {self.tempo_simulacao}: Torre - {aviao.id}, situação {aviao.situacao} proceder para {aeroporto_para_pouso}, distância {distancia_proximo_aeroporto}')
-                else:
-                    # Mantém avião na fila de pouso
-                    # Dado de comunicação
-                    logger_com.info(f't: {self.tempo_simulacao}: Torre - {aviao.id}, situação {aviao.situacao} permanecer na fila de pouso')
+            for blip in hq.nsmallest(self.max_voos_situacao_critica, self.fila_pouso):
+                _, _, _, aviao = blip
+                # Quantidade de avioes na fila de pouso dividido pela qde de pistas mais um ciclo
+                tempo_estimado_para_pouso = (len(self.fila_pouso) // len(self.pistas_pouso)) + 1
+                # Assume uma unidade de combustivel para uma unidade de tempo
+                if aviao.combustivel < tempo_estimado_para_pouso:
+                    # Primeiro sempre o aeroporto corrente
+                    # Busca o próximo aeroporto
+                    aeroporto_para_pouso = next(iter(aviao.aeroportos_chegada[1:]))
+                    distancia_proximo_aeroporto = aeroportos[aeroporto_para_pouso]
+                    if distancia_proximo_aeroporto <= aviao.combustivel:
+                        # Tira o avião da fila de pouso
+                        chave, _, _, aviao = hq.heappop(self.fila_pouso)
+                        self.total_combustivel_avioes_esperam_pouso -= aviao.combustivel
+                        # Dado de simulação
+                        logger_data.info(f';pop_desvia;{self.tempo_simulacao};{self.tempo_simulacao};{chave};{aviao.id};{aviao.combustivel};{aviao.situacao};{aviao.duracao_voo}')
+                        # Dado de comunicação
+                        logger_com.info(f't: {self.tempo_simulacao}: Torre - {aviao.id}, situação {aviao.situacao} proceder para {aeroporto_para_pouso}, distância {distancia_proximo_aeroporto}')
+                    else:
+                        # Mantém avião na fila de pouso
+                        # Dado de comunicação
+                        logger_com.info(f't: {self.tempo_simulacao}: Torre - {aviao.id}, situação {aviao.situacao} permanecer na fila de pouso')
 
     def decolar(self):
         '''
@@ -321,3 +321,4 @@ class SimulacaoAeroporto:
 
             # Aguarda duração mínima do ciclo
             self.aguarda_tempo_ciclo()
+

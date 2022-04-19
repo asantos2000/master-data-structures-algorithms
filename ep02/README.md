@@ -33,14 +33,15 @@
 
 ## Fórmulas e estado dos aviões
 
-- id, values = random.choice(list(companias.items()))
 - id = escolha aleatória da lista de companias + um inteiro de 100 a 999
-- aeroportos_chegada = values['aeroportos']
-self.aeroporto = random.choice(list(aeroportos.keys()))
-self.combustivel = random.randint(config.get('min_combustivel_aviao'), config.get('max_combustivel_aviao'))
-self.duracao_voo = random.randint(config.get('min_duracao_voo'), config.get('max_duracao_voo'))
-self.intencao = random.choice(['Pousar', 'Decolar'])
-self.situacao = random.choices(['Regular', 'Emergencia'], weights=(85, 15), k=1)[0]
+- aeroportos_chegada = Lista dos aeroportos da compania do aviao
+- aeroporto = escolha aleatória da lista de aeroportos
+- combustivel = valor aleatório entre min_combustivel_aviao e max_combustivel_aviao
+- duracao_voo = valor aleatório entre min_duracao_voo e max_duracao_voo
+- intencao = valor aleatório entre Pousar e Decolar
+- situacao = valor aleatório com 85% de chance de ser Regular e 15% de ser Emergência
+
+> Valor aleatório probabilidade de 50%, se não for indicado o contrário.
 
 ## Executando a simulação
 
