@@ -65,9 +65,8 @@ class ListaLigadaSimples:
             no = self.primeiro_no
         if k == 0:
             return no
-        else:
-            no = no.proximo
-            return self.buscar_pos(k - 1, no)
+
+        return self.buscar_pos(k - 1, no.proximo)
 
     def no_meio(self):
         lento = self.primeiro_no

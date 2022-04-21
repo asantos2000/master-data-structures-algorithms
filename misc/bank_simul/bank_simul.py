@@ -32,17 +32,13 @@ class BankSimulation:
         else:
             self.teller2()
 
-    def arrival(self):              
+    def arrival(self):                # sourcery skip: class-extract-method
         self.num_arrivals += 1
         self.num_in_system += 1
 
-        if self.num_in_q == 0:                                 #schedule next departure or arrival depending on state of servers
+        if self.num_in_q == 0:                             #schedule next departure or arrival depending on state of servers
             if self.state_T1==1 and self.state_T2==1:
-                self.num_in_q+=1
-                self.number_in_queue+=1
-                self.t_arrival=self.clock+self.gen_int_arr()
-                
-                
+                self.update_statistics()
             elif self.state_T1==0 and self.state_T2==0:
                 
                 if np.random.choice([0,1])==1:
@@ -50,16 +46,13 @@ class BankSimulation:
                     self.dep1= self.gen_service_time_teller1()
                     self.dep_sum1 += self.dep1
                     self.t_departure1=self.clock + self.dep1
-                    self.t_arrival=self.clock+self.gen_int_arr()
-
                 else:
                     self.state_T2=1
                     self.dep2= self.gen_service_time_teller2()
                     self.dep_sum2 += self.dep2
                     self.t_departure2=self.clock + self.dep2
-                    self.t_arrival=self.clock+self.gen_int_arr()
+                self.t_arrival=self.clock+self.gen_int_arr()
 
-                    
             elif self.state_T1==0 and self.state_T2 ==1:       #if server 2 is busy customer goes to server 1
                 self.dep1= self.gen_service_time_teller1()
                 self.dep_sum1 += self.dep1
@@ -72,21 +65,16 @@ class BankSimulation:
                 self.t_departure2=self.clock + self.dep2
                 self.t_arrival=self.clock+self.gen_int_arr()
                 self.state_T2=1
-        
-        elif self.num_in_q < 4 and self.num_in_q >= 1:       #if queue length is less than 4 generate next arrival and make customer join queue
-            self.num_in_q+=1
-            self.number_in_queue+=1                             
-            self.t_arrival=self.clock + self.gen_int_arr()
-            
-        elif self.num_in_q == 4:                             #if queue length is 4 equal prob to leave or stay
+
+        elif self.num_in_q < 4 and self.num_in_q >= 1:   #if queue length is less than 4 generate next arrival and make customer join queue
+            self.update_statistics()
+        elif self.num_in_q == 4:                         #if queue length is 4 equal prob to leave or stay
             if np.random.choice([0,1])==0: 
-                self.num_in_q+=1 
-                self.number_in_queue+=1                 
-                self.t_arrival=self.clock + self.gen_int_arr()
+                self.update_statistics()
             else:
                 self.lost_customers+=1
-                
-                
+
+
         elif self.num_in_q >= 5:                            #if queue length is more than 5 60% chance of leaving
             if np.random.choice([0,1],p=[0.4,0.6])==0:
                 self.t_arrival=self.clock+self.gen_int_arr()
@@ -94,6 +82,12 @@ class BankSimulation:
                 self.number_in_queue+=1 
             else:
                 self.lost_customers+=1
+
+    # TODO Rename this here and in `arrival`
+    def update_statistics(self):
+        self.num_in_q += 1
+        self.number_in_queue += 1
+        self.t_arrival = self.clock+self.gen_int_arr()
 
     def teller1(self):                #departure from server 2
         self.num_of_departures1 += 1

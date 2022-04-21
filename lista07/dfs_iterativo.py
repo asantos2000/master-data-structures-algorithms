@@ -1,5 +1,5 @@
 def dfs_iterative(graph, start):
-    stack += [start]
+    stack = [start]
     path = []
 
     while stack:
@@ -7,13 +7,11 @@ def dfs_iterative(graph, start):
         if vertex in path:
             continue
         path.append(vertex)
-        for neighbor in graph[vertex][::-1]:
-            stack.append(neighbor)
-
+        stack.extend(iter(graph[vertex][::-1]))
     return path
 
 def verificar_ciclos(graph, start):
-    stack += [start]
+    stack = [start]
     visited = []
 
     while stack:
@@ -21,9 +19,7 @@ def verificar_ciclos(graph, start):
         if vertex in visited:
             return True
         visited.append(vertex)
-        for neighbor in graph[vertex][::-1]:
-            stack.append(neighbor)
-
+        stack.extend(iter(graph[vertex][::-1]))
     return False
 
 

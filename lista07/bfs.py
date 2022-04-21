@@ -1,7 +1,6 @@
 def bfs(g, v):
     visited = [False] * (len(g) + 1)
-    queue = []
-    queue.append(v)
+    queue = [v]
     visited[v] = True
     while queue:
         v = queue.pop(0)

@@ -12,7 +12,7 @@ call: pytest ordena_insercao.py --hypothesis-show-statistics
 
 def ordena_insercao(A):
     print(len(A))
-    for i in range(0,len(A)-1):
+    for i in range(len(A)-1):
         print(i)
         eleito = i + 1
         #print(i, A[eleito])

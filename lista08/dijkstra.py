@@ -1,7 +1,5 @@
 def dijkstra(grafo, origem):
-    distancias = {}
-    for vertice in grafo:
-        distancias[vertice] = float('inf')
+    distancias = {vertice: float('inf') for vertice in grafo}
     distancias[origem] = 0
     vertices_visitados = []
 
@@ -13,7 +11,7 @@ def dijkstra(grafo, origem):
                 distancia_atual = distancias[vertice_atual] + grafo[vertice_atual][vizinho]
                 if distancia_atual < distancias[vizinho]:
                     distancias[vizinho] = distancia_atual
-    
+
     return distancias
 
 if __name__ == "__main__":

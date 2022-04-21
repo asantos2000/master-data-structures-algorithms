@@ -35,16 +35,13 @@ def k_esimo_menor(X, Y, lx, rx, ly, ry, k):
     nx = midx - lx + 1
     ny = midy - ly + 1
 
-    if (nx + ny > k):
-        if (X[midx] > Y[midy]):
-            return k_esimo_menor(X, Y, lx, midx - 1, ly, ry, k)
-        else:
-            return k_esimo_menor(X, Y, lx, rx, ly, midy - 1, k)
+    if nx + ny <= k:
+        return k_esimo_menor(X, Y, lx, rx, midy + 1, ry, k - ny) if (X[midx] > Y[midy]) else k_esimo_menor(X, Y, midx + 1, rx, ly, ry, k - nx)
+
+    if (X[midx] > Y[midy]):
+        return k_esimo_menor(X, Y, lx, midx - 1, ly, ry, k)
     else:
-        if (X[midx] > Y[midy]):
-            return k_esimo_menor(X, Y, lx, rx, midy + 1, ry, k - ny)
-        else:
-            return k_esimo_menor(X, Y, midx + 1, rx, ly, ry, k - nx)
+        return k_esimo_menor(X, Y, lx, rx, ly, midy - 1, k)
 
 
 if __name__ == "__main__":

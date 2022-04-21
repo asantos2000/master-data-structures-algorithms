@@ -13,18 +13,13 @@ def fibonacci(n):
 # T(n) = T(n-1) + T(n-2) + O(1) = O(2^n)
 # https://www.educative.io/courses/algorithms-coding-interviews-java/xV634O2M8Ml
 def f(n):
-    if n <= 1:
-        return n
-    return f(n-1) + f(n-2)
+    return n if n <= 1 else f(n-1) + f(n-2)
 
 # fibonacci O(n)
 def f_p(n):
-    stack = []
     result = 0
-    for i in range(n+1):
-        stack.append(i)
-
-    while len(stack) > 0:
+    stack = list(range(n+1))
+    while stack:
         result = result + stack.pop()
 
     return result

@@ -92,7 +92,7 @@ import random
 import time
 
 def test_majoritario():
-    for i in range(0,10):
+    for _ in range(10):
         V=5*[random.randrange(0,5),random.randrange(0,5),random.randrange(0,5)]
         # funcao
         inicio = time.time()

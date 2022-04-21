@@ -15,13 +15,11 @@ def verificar_simbolos_balanceados(expressao):
             pilha_abre.append(caracter)
 
         if caracter in (")]}"):
-            if len(pilha_abre) > 0:
-                aberto = pilha_abre.pop()
-                if not par(aberto, caracter):
-                    return "Expressao mal formada"
-            else:
+            if len(pilha_abre) <= 0:
                 return "Expressao mal formada"
-
+            aberto = pilha_abre.pop()
+            if not par(aberto, caracter):
+                return "Expressao mal formada"
     if len(pilha_abre) > 0:
         return "Expressao mal formada"
     else:

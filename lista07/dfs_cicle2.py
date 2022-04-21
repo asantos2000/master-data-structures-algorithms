@@ -1,23 +1,8 @@
 # Function for DFS_Traversal traversal
 def DFS_Traversal(graph, v, visited, parent_node=-1):
-    
     # assign current node as
     visited[v] = True
-
-    # loop for every edge (v, u)
-    for u in graph[v]:
-        # if u is not visited
-        if not visited[u]:
-            if DFS_Traversal(graph, u, visited, v):
-                return True
-
-        # if u is visited, and u is not a parent_node
-        elif u != parent_node:
-            # found a back-edge 
-            return True
-
-    # No back-edges were found 
-    return False
+    return any(not visited[u] and DFS_Traversal(graph, u, visited, v) or visited[u] and u != parent_node for u in graph[v])
 
 
 if __name__ == '__main__':

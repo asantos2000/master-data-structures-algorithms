@@ -28,11 +28,8 @@ def majoritario(V):
             E[V[i]] = E[V[i]] + 1
         except KeyError:
             E[V[i]] = 1
-    
-    for k, v in E.items():
-        if v >= m:
-            return k
-    return -1
+
+    return next((k for k, v in E.items() if v >= m), -1)
 
 # python majoritario.py
 if __name__ == "__main__":
@@ -74,7 +71,7 @@ import random
 import time
 
 def test_majoritario():
-    for i in range(0,10):
+    for _ in range(10):
         V=5*[random.randrange(0,5),random.randrange(0,5),random.randrange(0,5)]
         # funcao
         inicio = time.time()

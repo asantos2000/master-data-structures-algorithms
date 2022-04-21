@@ -35,17 +35,17 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 def test_double_k_esimo_menor():
-    for j in range(1,2):
+    lx = 0
+    ly = 0
+    k = 1 #random.randrange(1, tamanho + 1)
+    for _ in range(1,2):
         i = 8
         while i <= 4096:
-            X = random.sample(range(0, 10000), i)
-            Y = random.sample(range(0, 10000), i)
-            lx = 0
+            X = random.sample(range(10000), i)
+            Y = random.sample(range(10000), i)
             rx = len(X)-1
-            ly = 0
             ry = len(Y)-1
             tamanho = rx + ry + 1
-            k = 1 #random.randrange(1, tamanho + 1)
             # funcao
             inicio = time.time()
             kv = k_esimo_menor(sorted(X), sorted(Y), lx, rx, ly, ry, k)
@@ -55,4 +55,4 @@ def test_double_k_esimo_menor():
             print(f'{i}; {duracao}')
             f = find_small(X + Y, k)
             assert(kv == f)
-            i = i*2
+            i *= 2

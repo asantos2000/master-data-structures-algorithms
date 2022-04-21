@@ -8,7 +8,7 @@ from trees import Node
 
 def percurso_in_ordem(A: Node):
     pilha = []
-    while A is not None or len(pilha) > 0:
+    while A is not None or pilha:
         if A is not None:
             pilha.append(A)
             A = A.left

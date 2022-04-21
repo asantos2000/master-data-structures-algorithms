@@ -18,19 +18,13 @@ def maior_valor(A):
         return A[0]
 
     if len(A) == 2:
-        if A[0] > A[1]:
-            return A[0]
-        else:
-            return A[1]
+        return A[0] if A[0] > A[1] else A[1]
 
     meio = len(A) // 2
     a = maior_valor(A[:meio])
     b = maior_valor(A[meio:])
 
-    if a > b:
-        return a
-    else:
-        return b
+    return a if a > b else b
 
 
 def rand_list(num_elements, min, max):
@@ -44,7 +38,7 @@ def rand_list(num_elements, min, max):
     '''
     import random
     randomlist = []
-    for i in range(0, num_elements):
+    for _ in range(num_elements):
         n = random.randint(min, max)
         randomlist.append(n)
     return randomlist
@@ -61,6 +55,6 @@ if __name__ == "__main__":
     assert(maior_valor([99, 5, 64, 64, 23, 12, 5, 99, 11]) == 99)
 
     # Random test
-    for i in range(0, 20):
+    for _ in range(20):
         L = rand_list(5, 0, 100)
         print(L, maior_valor(L))

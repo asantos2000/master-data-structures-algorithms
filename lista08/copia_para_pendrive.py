@@ -23,9 +23,9 @@ def arquivos_para_copia(arquivos, C):
         else:
             break  # Arquivos restantes são maiores que a capacidade do pendrive
 
-        i = i + 1
+        i += 1
 
-    if len(p) == 0:
+    if not p:
         s = 0       # Não encontrou solução
     elif C > 0:
         s = 1       # Solução não ótima

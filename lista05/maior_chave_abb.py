@@ -15,9 +15,7 @@ def maior_chave_abb(A: Node):
     return maior
 
 def menor_chave_abb(A: Node):
-    if A is None or A.left is None:
-        return A.key
-    return menor_chave_abb(A.left)
+    return A.key if A is None or A.left is None else menor_chave_abb(A.left)
 
 if __name__ == '__main__':
     # True

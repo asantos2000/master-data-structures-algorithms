@@ -5,7 +5,7 @@ def color_nodes(graph):
     print(vertices)
     # Fila de prioridade
     for node in vertices:
-        neighbor_colors = set(color_map.get(neigh) for neigh in graph[node])
+        neighbor_colors = {color_map.get(neigh) for neigh in graph[node]}
         color_map[node] = next(
             # Escolha gulosa
             color for color in range(len(graph)) if color not in neighbor_colors

@@ -1,4 +1,6 @@
-def dfs_recursive(graph, vertex, path=[]):
+def dfs_recursive(graph, vertex, path = None):
+    if path is None:
+        path = []
     path += [vertex]
 
     for neighbor in graph[vertex]:

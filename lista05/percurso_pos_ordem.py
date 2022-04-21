@@ -8,7 +8,7 @@ from trees import Node
 
 def percurso_pos_ordem(A: Node):
     pilha = [A]
-    while len(pilha) > 0:
+    while pilha:
         A = pilha.pop()
         print(A.key)
         if A.right is not None:

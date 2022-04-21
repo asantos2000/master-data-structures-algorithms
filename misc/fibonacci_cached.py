@@ -3,9 +3,7 @@ from functools import lru_cache
 
 @lru_cache
 def fibonacci(n):
-    if n==0 or n == 1:
-        return n
-    return fibonacci(n - 1) + fibonacci(n - 2) 
+    return n if n <= 1 else fibonacci(n - 1) + fibonacci(n - 2) 
 
 tic = time.perf_counter()
 res = fibonacci(50)

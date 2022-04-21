@@ -11,10 +11,10 @@ maxMin (v[0..n − 1], n)
 
 from hypothesis import given, event, strategies as st
 
-def max_min(V):
+def max_min(V):  # sourcery skip: avoid-builtin-shadow
     max = V[0]
     min = V[0]
-    for i in range(0, len(V)):
+    for i in range(len(V)):
         if V[i] > max:
             max = V[i]
         if V[i] < min:

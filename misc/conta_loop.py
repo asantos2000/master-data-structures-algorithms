@@ -1,16 +1,16 @@
+import itertools
 import math
 
 def o_n(n):
     c = 0
-    for i in range(n):
+    for _ in range(n):
         c = c + 1
     return c
 
 def o_n2(n):
     c = 0
-    for i in range(n):
-        for j in range(n):
-            c = c + 1
+    for _, _ in itertools.product(range(n), range(n)):
+        c = c + 1
     return c
 
 def o_nlogn(n):
@@ -20,16 +20,16 @@ def o_nlogn(n):
         j = 1
         while j <= n:
             c = c + 1
-            j = j + i
-        i = i + 1
+            j += i
+        i += 1
     return c
 
 def o_sqrt_n(n):
     c = 0
     i = 0
-    while i * i <= n:
+    while i ** 2 <= n:
         c = c + 1
-        i = i + 1
+        i += 1
     return c
 
 if __name__ == '__main__':

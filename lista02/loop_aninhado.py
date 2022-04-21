@@ -13,7 +13,7 @@ def loop_count(n):
             #print(i, j, i + j, n, n <= j)
             #print(n, c)
             c = c + 1
-            j = j + i
+            j += i
     return c-1
 
 if __name__ == "__main__":

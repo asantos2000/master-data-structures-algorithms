@@ -7,7 +7,7 @@ class lista_adjacente:
         Construtor da classe.
         """
         self.n = n
-        self.adj = [[] for i in range(n)]
+        self.adj = [[] for _ in range(n)]
 
     def adiciona_aresta(self, u, v):
         """
@@ -28,11 +28,10 @@ class lista_adjacente:
         Função que percorre um grafo em profundidade usando pilha explícita.
         """
         visitado = [False] * self.n
-        pilha = []
-        pilha.append(no)
+        pilha = [no]
         visitado[no] = True
         visitou = False
-        while len(pilha) > 0:
+        while pilha:
             no = pilha.pop()
             self.adj[no].reverse()
             while len(self.adj[no]) > 0 and not visitou:
@@ -42,7 +41,7 @@ class lista_adjacente:
                     visitado[v] = True
                     visitou = True
             visitou = False
-        
+
         print(pilha)
 
 if __name__ == "__main__":

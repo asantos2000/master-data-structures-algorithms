@@ -10,7 +10,7 @@ def bubbleSort(A):
 def bubbleSort2(A):
     tamanho = len(A) - 1
     while tamanho > 0:
-        for j in range(0, tamanho):
+        for j in range(tamanho):
             if A[j] > A[j+1]:
                 A[j], A[j+1] = A[j+1], A[j]
         tamanho = tamanho - 1

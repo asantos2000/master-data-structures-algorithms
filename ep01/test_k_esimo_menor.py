@@ -35,14 +35,14 @@ def test_k_esimo_menor(X, Y):
 
 
 def test_double_k_esimo_menor():
+    lx = 0
+    ly = 0
     for _ in range(1, 10):
         i = 8
         while i <= 8192:
-            X = random.sample(range(0, 10000), i)
-            Y = random.sample(range(0, 10000), i)
-            lx = 0
+            X = random.sample(range(10000), i)
+            Y = random.sample(range(10000), i)
             rx = len(X)-1
-            ly = 0
             ry = len(Y)-1
             tamanho = rx + ry + 1
             k = random.randrange(1, tamanho + 1)
@@ -55,4 +55,4 @@ def test_double_k_esimo_menor():
             print(f'{i}; {duracao}')
             f = find_small(X + Y, k)
             assert(kv == f)
-            i = i*2
+            i *= 2
