@@ -19,15 +19,19 @@ if __name__ == '__main__':
     moedas = [5, 10]
     v = 65
     k = 6
-    print("Não") if troco(moedas, v) > k else print("Sim")
+    m = troco(moedas, v)
+    print(m)
+    print("Não") if m > k else print("Sim")
+
+    moedas = [5, 10]
+    v = 55
+    m = troco(moedas, v)
+    print(m)
+    print("Não") if m > k else print("Sim")
 
     # mmc = mmc(5, 10, 65)
     moedas = [1, 2]
     v = 13
-    print("Não") if troco(moedas, v) > k else print("Sim")
-
-    moedas = [5, 10]
-    v = 55
     print("Não") if troco(moedas, v) > k else print("Sim")
 
     # mmc = mmc(5, 10, 55)
